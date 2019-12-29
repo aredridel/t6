@@ -1,9 +1,11 @@
-var tap = require('tap');
-var path = require('path');
-var spawn = require('child_process').spawn;
-var concat = require('concat-stream');
+import tap from 'tap';
+import path from 'path';
+import { spawn } from 'child_process';
+import concat from 'concat-stream';
+import url from "url";
+const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
 
-var stripFullStack = require('./common').stripFullStack;
+import { stripFullStack } from './common.js';
 
 tap.test('callback returning rejected promise should cause that test (and only that test) to fail', function (tt) {
     tt.plan(1);
@@ -17,7 +19,7 @@ tap.test('callback returning rejected promise should cause that test (and only t
             return tt.pass('the test file indicated it should be skipped');
         }
 
-        strippedString = stripFullStack(rowsString);
+        let strippedString = stripFullStack(rowsString);
 
         // hack for consistency across all versions of node
         // some versions produce a longer stack trace for some reason
@@ -60,7 +62,7 @@ tap.test('subtest callback returning rejected promise should cause that subtest 
             return tt.pass('the test file indicated it should be skipped');
         }
 
-        strippedString = stripFullStack(rowsString);
+        let strippedString = stripFullStack(rowsString);
 
         // hack for consistency across all versions of node
         // some versions produce a longer stack trace for some reason

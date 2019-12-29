@@ -1,4 +1,4 @@
-var test = require('../../');
+import test from '../../index.js';
 
 test('default messages', function (t) {
     t.plan(7);

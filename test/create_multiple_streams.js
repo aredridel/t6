@@ -1,9 +1,9 @@
-var tape = require('../');
+import { default as test, createHarness}  from '../index.js';
 
-tape.test('createMultipleStreams', function (tt) {
+test('createMultipleStreams', function (tt) {
     tt.plan(2);
 
-    var th = tape.createHarness();
+    var th = createHarness();
     th.createStream();
     th.createStream();
 

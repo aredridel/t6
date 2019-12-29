@@ -1,13 +1,13 @@
-var tape = require('../');
-var tap = require('tap');
-var concat = require('concat-stream');
+import { createHarness } from "../index.js";
+import tap from "tap";
+import concat from "concat-stream";
 
-var stripFullStack = require('./common').stripFullStack;
+import { stripFullStack } from './common.js';
 
 tap.test('failures', function (tt) {
     tt.plan(1);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream().pipe(concat(function (body) {
         tt.equal(
             stripFullStack(body.toString('utf8')),

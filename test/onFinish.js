@@ -1,5 +1,5 @@
-var tap = require("tap");
-var tape = require("../");
+import tap from 'tap';
+import tape from "../index.js";
 
 tap.test("on finish", {timeout: 1000}, function (tt) {
     tt.plan(1);

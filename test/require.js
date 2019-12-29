@@ -1,6 +1,8 @@
-var tap = require('tap');
-var spawn = require('child_process').spawn;
-var concat = require('concat-stream');
+import tap from 'tap';
+import { spawn } from 'child_process';
+import concat from 'concat-stream';
+import url from "url";
+import path from "path";
 
 tap.test('requiring a single module', function (t) {
     t.plan(2);
@@ -62,8 +64,8 @@ tap.test('requiring multiple modules', function (t) {
 });
 
 function tape(args) {
-    var proc = require('child_process');
-    var bin = __dirname + '/../bin/tape';
+    const bin = path.resolve(url.fileURLToPath(import.meta.url), '../../bin/tape');
+    const dir = path.resolve(url.fileURLToPath(import.meta.url), '../');
 
-    return proc.spawn('node', [bin].concat(args.split(' ')), { cwd: __dirname });
+    return spawn('node', [bin].concat(args.split(' ')), { cwd: dir });
 }

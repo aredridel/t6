@@ -1,6 +1,6 @@
-var tape = require('../..');
+import test from "../../index.js";
 
-tape.test('test-a', function (t) {
+test('test-a', function (t) {
     t.ok(global.module_a, 'module-a loaded in same context');
     t.pass('test ran after module-a was loaded');
     t.end();

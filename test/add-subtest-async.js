@@ -1,4 +1,4 @@
-var test = require('../');
+import { test } from "../index.js";
 
 test('parent', function (t) {
     t.pass('parent');

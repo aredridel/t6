@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 
 test('only4 duplicate test name', function (t) {
     t.fail('not 1');

@@ -1,4 +1,4 @@
-var test = require('../../');
+import test from '../../index.js';
 
 test('async4', async function myTest(t) {
     try {

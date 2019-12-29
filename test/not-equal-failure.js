@@ -1,14 +1,11 @@
-var tape = require('../');
-var tap = require('tap');
-var concat = require('concat-stream');
-var tapParser = require('tap-parser');
-var common = require('./common');
-
-var getDiag = common.getDiag;
-var stripFullStack = common.stripFullStack;
+import { createHarness } from '../index.js';
+import tap from 'tap';
+import concat from 'concat-stream';
+import tapParser from 'tap-parser';
+import { getDiag, stripFullStack } from './common.js';
 
 tap.test('not equal failure', function (assert) {
-    var test = tape.createHarness({ exit: false });
+    var test = createHarness({ exit: false });
     var stream = test.createStream();
     var parser = tapParser();
     assert.plan(3);

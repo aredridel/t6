@@ -1,8 +1,8 @@
-var defined = require('defined');
-var createDefaultStream = require('./lib/default_stream');
-var Test = require('./lib/test');
-var createResult = require('./lib/results');
-var through = require('through');
+import defined from 'defined';
+import createDefaultStream from './lib/default_stream.js';
+import Test from './lib/test.js';
+import createResult from './lib/results.js';
+import through from 'through';
 
 var canEmitExit = typeof process !== 'undefined' && process
     && typeof process.on === 'function' && process.browser !== true
@@ -16,45 +16,55 @@ var nextTick = typeof setImmediate !== 'undefined'
     : process.nextTick
 ;
 
-exports = module.exports = (function () {
-    var harness;
-    var lazyLoad = function () {
-        return getHarness().apply(this, arguments);
+export default function lazyLoad() {
+    return getHarness().apply(this, arguments);
+};
+
+Object.keys(Test.prototype).forEach(prop => {
+    lazyLoad[prop] = function () {
+        const harness = getHarness();
+        console.warn(harness, prop, harness[prop]);
+        return harness[prop].apply(harness, arguments);
     };
+});
 
-    lazyLoad.only = function () {
-        return getHarness().only.apply(this, arguments);
-    };
+lazyLoad.skip = Test.skip;
+lazyLoad.only = only;
+lazyLoad.onFinish = onFinish;
+lazyLoad.onFailure = onFailure;
 
-    lazyLoad.createStream = function (opts) {
-        if (!opts) opts = {};
-        if (!harness) {
-            var output = through();
-            getHarness({ stream: output, objectMode: opts.objectMode });
-            return output;
-        }
-        return harness.createStream(opts);
-    };
+var harness;
 
-    lazyLoad.onFinish = function () {
-        return getHarness().onFinish.apply(this, arguments);
-    };
+export function only() {
+    return getHarness().only.apply(this, arguments);
+};
 
-    lazyLoad.onFailure = function () {
-        return getHarness().onFailure.apply(this, arguments);
-    };
-
-    lazyLoad.getHarness = getHarness;
-
-    return lazyLoad;
-
-    function getHarness(opts) {
-        if (!opts) opts = {};
-        opts.autoclose = !canEmitExit;
-        if (!harness) harness = createExitHarness(opts);
-        return harness;
+export function createStream(opts) {
+    if (!opts) opts = {};
+    if (!harness) {
+        var output = through();
+        getHarness({ stream: output, objectMode: opts.objectMode });
+        return output;
     }
-})();
+    return harness.createStream(opts);
+};
+
+export function onFinish() {
+    const harness = getHarness();
+    return harness.onFinish.apply(harness, arguments);
+};
+
+export function onFailure() {
+    const harness = getHarness();
+    return harness.onFailure.apply(harness, arguments);
+};
+
+export function getHarness(opts) {
+    if (!opts) opts = {};
+    opts.autoclose = !canEmitExit;
+    if (!harness) harness = createExitHarness(opts);
+    return harness;
+}
 
 function createExitHarness(conf) {
     if (!conf) conf = {};
@@ -95,10 +105,7 @@ function createExitHarness(conf) {
     return harness;
 }
 
-exports.createHarness = createHarness;
-exports.Test = Test;
-exports.test = exports; // tap compat
-exports.test.skip = Test.skip;
+export { createHarness, Test, lazyLoad as test };
 
 var exitInterval;
 

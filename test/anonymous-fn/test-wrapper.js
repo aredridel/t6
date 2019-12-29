@@ -1,5 +1,5 @@
 // Example of wrapper function that would invoke tape
-module.exports = function (testCase) {
+export default function (testCase) {
     return function (t) {
         setUp();
         testCase(t);

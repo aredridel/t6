@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 
 var asyncFunction = function (callback) {
     setTimeout(callback, Math.random * 50);

@@ -1,10 +1,10 @@
-var tape = require('../');
-var tap = require('tap');
-var concat = require('concat-stream');
-var inspect = require('object-inspect');
-var assign = require('object.assign');
+import { createHarness } from '../index.js';
+import tap from 'tap';
+import concat from 'concat-stream';
+import inspect from 'object-inspect';
+import assign from 'object.assign';
 
-var stripFullStack = require('./common').stripFullStack;
+import { stripFullStack } from './common.js';
 
 function fn() {
     throw new TypeError('RegExp');
@@ -29,7 +29,7 @@ var thrower = function () { throw messageGetterError; };
 tap.test('failures', function (tt) {
     tt.plan(1);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream().pipe(concat(function (body) {
         tt.equal(
             stripFullStack(body.toString('utf8')),

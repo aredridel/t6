@@ -1,4 +1,4 @@
-var test = require('../../');
+import test from "../../index.js";
 
 test('todo fail', { todo: true }, function (t) {
     t.plan(1);

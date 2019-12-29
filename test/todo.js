@@ -1,12 +1,11 @@
-var tap = require('tap');
-var tape = require('../');
-var concat = require('concat-stream');
+import tap from 'tap';
+import concat from 'concat-stream';
 
-var common = require('./common');
-var stripFullStack = common.stripFullStack;
+import { createHarness } from '../index.js';
+import { stripFullStack } from "./common.js";
 
 tap.test('tape todo test', function (assert) {
-    var test = tape.createHarness({ exit: false });
+    var test = createHarness({ exit: false });
     assert.plan(1);
 
     test.createStream().pipe(concat(function (body) {

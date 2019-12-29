@@ -1,9 +1,9 @@
-var tap = require('tap');
-var tape = require('../');
-var concat = require('concat-stream');
+import tap from 'tap';
+import { createHarness } from "../index.js";
+import concat from 'concat-stream';
 
 tap.test('tape only test', function (tt) {
-    var test = tape.createHarness({ exit: false });
+    var test = createHarness({ exit: false });
     var ran = [];
 
     var tc = function (rows) {

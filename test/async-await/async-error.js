@@ -1,4 +1,4 @@
-var test = require('../../');
+import test from '../../index.js';
 
 test('async-error', async function myTest(t) {
     t.ok(true, 'before throw');

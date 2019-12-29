@@ -1,14 +1,14 @@
-var falafel = require('falafel');
-var tape = require('../');
-var tap = require('tap');
-var concat = require('concat-stream');
+import falafel from 'falafel';
+import { createHarness } from '../index.js';
+import tap from 'tap';
+import concat from 'concat-stream';
 
-var stripFullStack = require('./common').stripFullStack;
+import { stripFullStack } from './common.js';
 
 tap.test('array test', function (tt) {
     tt.plan(1);
 
-    var test = tape.createHarness({ exit: false });
+    var test = createHarness({ exit: false });
     var tc = function (rows) {
         tt.same(stripFullStack(rows.toString('utf8')), [
             'TAP version 13',

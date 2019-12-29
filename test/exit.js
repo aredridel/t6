@@ -1,9 +1,10 @@
-var tap = require('tap');
-var path = require('path');
-var spawn = require('child_process').spawn;
-var concat = require('concat-stream');
-
-var stripFullStack = require('./common').stripFullStack;
+import tap from 'tap';
+import path from 'path';
+import { spawn } from 'child_process';
+import concat from 'concat-stream';
+import { stripFullStack } from "./common.js";
+import url from "url";
+const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
 
 tap.test('exit ok', function (t) {
     t.plan(2);

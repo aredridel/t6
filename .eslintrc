@@ -9,12 +9,9 @@
             "named": "never",
         }],
     },
-    "overrides": [
-        {
-            "files": ["test/async-await/*"],
-            "parserOptions": {
-                "ecmaVersion": 2017,
-            },
-        },
-    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
 }

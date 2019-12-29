@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 
 test('Harness async test support', function (t) {
     t.plan(3);

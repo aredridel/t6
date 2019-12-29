@@ -1,7 +1,7 @@
-var tap = require('tap');
-var test = require('../');
-var concat = require('concat-stream');
-var stripFullStack = require('./common').stripFullStack;
+import tap from 'tap';
+import { createHarness } from "../index.js";
+import concat from 'concat-stream';
+import { stripFullStack } from './common.js';
 
 tap.test('test skip explanations', function (assert) {
     assert.plan(1);
@@ -33,7 +33,7 @@ tap.test('test skip explanations', function (assert) {
         ].join('\n'));
     };
 
-    var tapeTest = test.createHarness();
+    var tapeTest = createHarness();
     tapeTest.createStream().pipe(concat(verify));
 
     tapeTest('(this skips)', { skip: true }, function (t) {

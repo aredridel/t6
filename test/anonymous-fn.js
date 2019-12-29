@@ -1,14 +1,14 @@
-var tape = require('../');
-var tap = require('tap');
-var concat = require('concat-stream');
+import { createHarness } from "../index.js";
+import tap from 'tap';
+import concat from 'concat-stream';
 
-var stripFullStack = require('./common').stripFullStack;
-var testWrapper = require('./anonymous-fn/test-wrapper');
+import {stripFullStack } from './common.js';
+import testWrapper from './anonymous-fn/test-wrapper.js';
 
 tap.test('inside anonymous functions', function (tt) {
     tt.plan(1);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     var tc = function (rows) {
         var body = stripFullStack(rows.toString('utf8'));
 

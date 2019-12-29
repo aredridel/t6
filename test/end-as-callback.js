@@ -1,10 +1,10 @@
-var tap = require("tap");
-var forEach = require("for-each");
-var tape = require("../");
-var concat = require('concat-stream');
+import tap from "tap";
+import forEach from "for-each";
+import {createHarness} from "../index.js";
+import concat from 'concat-stream';
 
 tap.test("tape assert.end as callback", function (tt) {
-    var test = tape.createHarness({ exit: false });
+    var test = createHarness({ exit: false });
 
     test.createStream().pipe(concat(function (rows) {
         tt.equal(rows.toString('utf8'), [

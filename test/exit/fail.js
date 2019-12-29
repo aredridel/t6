@@ -1,5 +1,5 @@
-var test = require('../../');
-var falafel = require('falafel');
+import test from "../../index.js";
+import falafel from 'falafel';
 
 test('array', function (t) {
     t.plan(5);

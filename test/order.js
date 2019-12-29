@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 var current = 0;
 
 test(function (t) {

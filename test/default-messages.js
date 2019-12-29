@@ -1,7 +1,9 @@
-var tap = require('tap');
-var path = require('path');
-var spawn = require('child_process').spawn;
-var concat = require('concat-stream');
+import tap from 'tap';
+import path from 'path';
+import { spawn } from 'child_process';
+import concat from 'concat-stream';
+import url from "url";
+const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
 
 tap.test('default messages', function (t) {
     t.plan(1);

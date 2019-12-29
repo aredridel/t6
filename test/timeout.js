@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 var ran = 0;
 
 test('timeout', function (t) {

@@ -1,13 +1,13 @@
-var tape = require('../');
-var tap = require('tap');
-var concat = require('concat-stream');
-var tapParser = require('tap-parser');
-var yaml = require('js-yaml');
+import { createHarness } from '../index.js';
+import tap from 'tap';
+import concat from 'concat-stream';
+import tapParser from 'tap-parser';
+import yaml from 'js-yaml';
 
 tap.test('preserves stack trace with newlines', function (tt) {
     tt.plan(3);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     var stream = test.createStream();
     var parser = stream.pipe(tapParser());
     var stackTrace = 'foo\n  bar';
@@ -63,7 +63,7 @@ tap.test('preserves stack trace with newlines', function (tt) {
 tap.test('parses function name from original stack', function (tt) {
     tt.plan(1);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream();
 
     test._results._watch = function (t) {
@@ -81,7 +81,7 @@ tap.test('parses function name from original stack', function (tt) {
 tap.test('parses function name from original stack for anonymous function', function (tt) {
     tt.plan(1);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream();
 
     test._results._watch = function (t) {
@@ -99,7 +99,7 @@ tap.test('parses function name from original stack for anonymous function', func
 tap.test('preserves stack trace for failed assertions', function (tt) {
     tt.plan(6);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     var stream = test.createStream();
     var parser = stream.pipe(tapParser());
 
@@ -107,7 +107,7 @@ tap.test('preserves stack trace for failed assertions', function (tt) {
     parser.once('assert', function (data) {
         tt.equal(typeof data.diag.at, 'string');
         tt.equal(typeof data.diag.stack, 'string');
-        at = data.diag.at || '';
+        const at = data.diag.at || '';
         stack = data.diag.stack || '';
         tt.ok(/^Error: true should be false(\n    at .+)+/.exec(stack), 'stack should be a stack');
         tt.deepEqual(data, {
@@ -164,7 +164,7 @@ tap.test('preserves stack trace for failed assertions', function (tt) {
 tap.test('preserves stack trace for failed assertions where actual===falsy', function (tt) {
     tt.plan(6);
 
-    var test = tape.createHarness();
+    var test = createHarness();
     var stream = test.createStream();
     var parser = stream.pipe(tapParser());
 
@@ -172,7 +172,7 @@ tap.test('preserves stack trace for failed assertions where actual===falsy', fun
     parser.once('assert', function (data) {
         tt.equal(typeof data.diag.at, 'string');
         tt.equal(typeof data.diag.stack, 'string');
-        at = data.diag.at || '';
+        const at = data.diag.at || '';
         stack = data.diag.stack || '';
         tt.ok(/^Error: false should be true(\n    at .+)+/.exec(stack), 'stack should be a stack');
         tt.deepEqual(data, {

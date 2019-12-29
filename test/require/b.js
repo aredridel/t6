@@ -1,6 +1,6 @@
-var tape = require('../..');
+import test from "../../index.js";
 
-tape.test('module-b', function (t) {
+test('module-b', function (t) {
     t.plan(1);
     t.pass('loaded module b');
 });

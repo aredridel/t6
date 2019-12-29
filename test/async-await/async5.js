@@ -1,7 +1,7 @@
-var util = require('util');
-var http = require('http');
+import util from 'util';
+import http from 'http';
 
-var test = require('../../');
+import test from '../../index.js';
 
 test('async5', async function myTest(t) {
     try {

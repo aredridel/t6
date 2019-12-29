@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 
 test('bind works', function (t) {
     t.plan(2);

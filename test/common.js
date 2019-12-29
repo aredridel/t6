@@ -1,9 +1,12 @@
-var path = require('path');
-var spawn = require('child_process').spawn;
-var concat = require('concat-stream');
-var yaml = require('js-yaml');
+import path from 'path';
+import { spawn } from 'child_process';
+import concat from 'concat-stream';
+import yaml from 'js-yaml';
+import url from 'url';
 
-module.exports.getDiag = function (body) {
+const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
+
+export function getDiag(body) {
     var yamlStart = body.indexOf('  ---');
     var yamlEnd = body.indexOf('  ...\n');
     var diag = body.slice(yamlStart, yamlEnd).split('\n').map(function (line) {
@@ -35,15 +38,15 @@ module.exports.getDiag = function (body) {
 //    and replace them with placeholders.
 
 var stripChangingData = function (line) {
-    var withoutTestDir = line.replace(__dirname, '$TEST');
-    var withoutPackageDir = withoutTestDir.replace(path.dirname(__dirname), '$TAPE');
+    var withoutTestDir = line.replace(url.resolve(import.meta.url, '.'), '$TEST/');
+    var withoutPackageDir = withoutTestDir.replace(url.resolve(import.meta.url, '..'), '$TAPE/');
     var withoutPathSep = withoutPackageDir.replace(new RegExp('\\' + path.sep, 'g'), '/');
     var withoutLineNumbers = withoutPathSep.replace(/:\d+:\d+/g, ':$LINE:$COL');
     var withoutNestedLineNumbers = withoutLineNumbers.replace(/, \<anonymous\>:\$LINE:\$COL\)$/, ')');
     return withoutNestedLineNumbers;
 };
 
-module.exports.stripFullStack = function (output) {
+export function stripFullStack(output) {
     var stripped = '          [... stack stripped ...]';
     var withDuplicates = output.split('\n').map(stripChangingData).map(function (line) {
         var m = line.match(/[ ]{8}at .*\((.*)\)/);
@@ -66,7 +69,7 @@ module.exports.stripFullStack = function (output) {
     );
 };
 
-module.exports.runProgram = function (folderName, fileName, cb) {
+export function runProgram(folderName, fileName, cb) {
     var result = {
         stdout: null,
         stderr: null,
@@ -80,7 +83,11 @@ module.exports.runProgram = function (folderName, fileName, cb) {
         result.stdout = stdoutRows;
     }));
     ps.stderr.pipe(concat(function (stderrRows) {
-        result.stderr = stderrRows;
+        if (stderrRows) {
+            result.stderr = stderrRows.toString().replace(/^.*ExperimentalWarning.*$\n/m, '');
+        } else {
+            result.stderr = '';
+        }
     }));
 
     ps.on('exit', function (code) {

@@ -1,7 +1,7 @@
-var tap = require('tap');
-var tape = require('../');
-var forEach = require('for-each');
-var through = require('through');
+import tap from 'tap';
+import { createStream, default as tape } from '../index.js';
+import forEach from 'for-each';
+import through from 'through';
 
 tap.test('object results', function (assert) {
     var printer = through({ objectMode: true });
@@ -47,7 +47,7 @@ tap.test('object results', function (assert) {
         assert.end();
     };
 
-    tape.createStream({ objectMode: true })
+    createStream({ objectMode: true })
         .pipe(printer);
 
     tape('parent', function (t1) {

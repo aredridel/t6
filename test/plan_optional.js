@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 
 test('plan should be optional', function (t) {
     t.pass('no plan here');

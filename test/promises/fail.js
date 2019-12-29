@@ -1,4 +1,4 @@
-var test = require('../../');
+import test from "../../index.js";
 
 if (typeof Promise === 'function' && typeof Promise.resolve === 'function') {
     test('promise', function (t) {

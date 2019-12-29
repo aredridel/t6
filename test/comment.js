@@ -1,6 +1,6 @@
-var concat = require('concat-stream');
-var tap = require('tap');
-var tape = require('../');
+import concat from 'concat-stream';
+import tap from 'tap';
+import { createHarness } from "../index.js";
 
 // Exploratory test to ascertain proper output when no t.comment() call
 // is made.
@@ -21,7 +21,7 @@ tap.test('no comment', function (assert) {
         ].join('\n'));
     };
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream().pipe(concat(verify));
     test('no comment', function (t) {
         t.end();
@@ -31,7 +31,7 @@ tap.test('no comment', function (assert) {
 // Exploratory test, can we call t.comment() passing nothing?
 tap.test('missing argument', function (assert) {
     assert.plan(1);
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream();
     test('missing argument', function (t) {
         try {
@@ -48,7 +48,7 @@ tap.test('missing argument', function (assert) {
 // Exploratory test, can we call t.comment() passing nothing?
 tap.test('null argument', function (assert) {
     assert.plan(1);
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream();
     test('null argument', function (t) {
         try {
@@ -85,7 +85,7 @@ tap.test('whitespace', function (assert) {
         ].join('\n'));
     };
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream().pipe(concat(verify));
     test('whitespace', function (t) {
         t.comment(' ');
@@ -122,7 +122,7 @@ tap.test('non-string types', function (assert) {
         ].join('\n'));
     };
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream().pipe(concat(verify));
     test('non-string types', function (t) {
         t.comment(true);
@@ -159,7 +159,7 @@ tap.test('multiline string', function (assert) {
         ].join('\n'));
     };
 
-    var test = tape.createHarness();
+    var test = createHarness();
     test.createStream().pipe(concat(verify));
     test('multiline strings', function (t) {
         t.comment([

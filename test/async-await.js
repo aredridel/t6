@@ -1,7 +1,5 @@
-var tap = require('tap');
-
-var stripFullStack = require('./common').stripFullStack;
-var runProgram = require('./common').runProgram;
+import tap from 'tap';
+import { stripFullStack, runProgram } from './common.js';
 
 var nodeVersion = process.versions.node;
 var majorVersion = nodeVersion.split('.')[0];
@@ -217,7 +215,8 @@ tap.test('async-error', function (t) {
         lines = lines.filter(function (line) {
             return ! /\(timers.js:/.test(line) &&
                 ! /\(internal\/timers.js:/.test(line) &&
-                ! /Immediate\.next/.test(line);
+                ! /Immediate\.next/.test(line) &&
+                ! /ExperimentalWarning/.test(line);
         });
         stderr = lines.join('\n');
 

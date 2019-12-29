@@ -1,4 +1,4 @@
-var test = require('../');
+import test from '../index.js';
 
 test('only3 test 1', function (t) {
     t.fail('not 1');
