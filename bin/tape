@@ -2,12 +2,13 @@
 
 import resolveModule from 'resolve';
 import { resolve as resolvePath } from 'path';
-import main from "async-main";
 import parseOpts from 'minimist';
 import glob from 'glob';
+import am from "am";
 
+import { getHarness } from "../index.js";
 
-main.default(async () => {
+am(async () => {
     var opts = parseOpts(process.argv.slice(2), {
         alias: { r: 'require' },
         string: 'require',
@@ -19,6 +20,9 @@ main.default(async () => {
     if (typeof opts.require === 'string') {
         opts.require = [opts.require];
     }
+
+    const harness = getHarness();
+    harness._results._holdDone();
 
     for (const module of opts.require) {
         var options  = { basedir: cwd, extensions: ['.js', '.mjs', '.cjs', '.json', '.node'] };
@@ -43,6 +47,9 @@ main.default(async () => {
             await import(resolvePath(cwd, file));
         }
     }
+
+    harness._results.run();
+    harness._results._releaseDone();
 });
 
 // vim: ft=javascript

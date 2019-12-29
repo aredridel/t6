@@ -61,7 +61,7 @@ export function onFailure() {
 
 export function getHarness(opts) {
     if (!opts) opts = {};
-    opts.autoclose = !canEmitExit;
+    if (!('autoclose' in opts)) opts.autoclose = !canEmitExit;
     if (!harness) harness = createExitHarness(opts);
     return harness;
 }
