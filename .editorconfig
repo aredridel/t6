@@ -25,6 +25,7 @@ max_line_length = off
 
 [*.yml]
 max_line_length = off
+indent_size = 2
 
 [Makefile]
 max_line_length = off
