@@ -1,21 +1,12 @@
 {
-    "name": "tape",
-    "version": "5.0.0-next.0",
-    "description": "tap-producing test harness for node and browsers",
+    "name": "@aredridel/t6",
+    "version": "6.0.0",
+    "description": "tap-producing ESM test harness for node and browsers",
     "main": "index.js",
     "type": "module",
-    "exports": {
-        ".": [
-            {
-                "default": "./index.js"
-            },
-            "./index.js"
-        ],
-        "./lib/": "./lib/",
-        "./package": "./package.json",
-        "./package.json": "./package.json"
+    "bin": {
+        "t6": "./bin/tape"
     },
-    "bin": "./bin/tape",
     "directories": {
         "example": "example",
         "test": "test"

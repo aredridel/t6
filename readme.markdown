@@ -1,17 +1,21 @@
-# tape
+# @aredridel/t6
 
 tap-producing test harness for node and browsers
 
+This is based on `tape`, but ported to pure ESM style, for running in modern runtimes only.
+
+<!--
 [![browser support](https://ci.testling.com/substack/tape.png)](http://ci.testling.com/substack/tape)
 
 [![build status](https://secure.travis-ci.org/substack/tape.svg?branch=master)](http://travis-ci.org/substack/tape)
 
 ![tape](https://web.archive.org/web/20170612184731if_/http://substack.net/images/tape_drive.png)
+-->
 
 # example
 
 ``` js
-var test = require('tape');
+import test from "@aredridel/t6";
 
 test('timing test', function (t) {
     t.plan(2);
@@ -27,6 +31,7 @@ test('timing test', function (t) {
 
 ```
 $ node example/timing.js
+(node:12355) ExperimentalWarning: The ESM module loader is experimental.
 TAP version 13
 # timing test
 ok 1 should be equal
@@ -45,31 +50,30 @@ not ok 2 should be equal
 
 # usage
 
-You always need to `require('tape')` in test files. You can run the tests by
-usual node means (`require('test-file.js')` or `node test-file.js`). You can
-also run tests using the `tape` binary to utilize globbing, on Windows for
-example:
+You always need to `import test from "@aredridel/t6"` in test files. You can
+run the tests by usual node means (`import('test-file.js')` or `node test-file.js`).
+You can also run tests using the `t6` binary to utilize globbing, on Windows
+for example:
 
 ```sh
-$ tape tests/**/*.js
+$ t6 tests/**/*.js
 ```
 
-`tape`'s arguments are passed to the
-[`glob`](https://www.npmjs.com/package/glob) module. If you want `glob` to
+`t6`'s arguments are passed to the [`glob`](https://www.npmjs.com/package/glob) module. If you want `glob` to
 perform the expansion on a system where the shell performs such expansion, quote
 the arguments as necessary:
 
 ```sh
-$ tape 'tests/**/*.js'
-$ tape "tests/**/*.js"
+$ t6 'tests/**/*.js'
+$ t6 "tests/**/*.js"
 ```
 
 ## Preloading modules
 
-Additionally, it is possible to make `tape` load one or more modules before running any tests, by using the `-r` or `--require` flag. Here's an example that loads [babel-register](http://babeljs.io/docs/usage/require/) before running any tests, to allow for JIT compilation:
+Additionally, it is possible to make `t6` load one or more modules before running any tests, by using the `-r` or `--require` flag. Here's an example that loads [babel-register](http://babeljs.io/docs/usage/require/) before running any tests, to allow for JIT compilation:
 
 ```sh
-$ tape -r babel-register tests/**/*.js
+$ t6 -r babel-register tests/**/*.js
 ```
 
 Depending on the module you're loading, you may be able to parameterize it using environment variables or auxiliary files. Babel, for instance, will load options from [`.babelrc`](http://babeljs.io/docs/usage/babelrc/) at runtime.
@@ -79,14 +83,14 @@ The `-r` flag behaves exactly like node's `require`, and uses the same module re
 For example:
 
 ```sh
-$ tape -r ./my/local/module tests/**/*.js
+$ t6 -r ./my/local/module tests/**/*.js
 ```
 
-Please note that all modules loaded using the `-r` flag will run *before* any tests, regardless of when they are specified. For example, `tape -r a b -r c` will actually load `a` and `c` *before* loading `b`, since they are flagged as required modules.
+Please note that all modules loaded using the `-r` flag will run *before* any tests, regardless of when they are specified. For example, `t6 -r a b -r c` will actually load `a` and `c` *before* loading `b`, since they are flagged as required modules.
 
-# things that go well with tape
+# things that go well with t6
 
-`tape` maintains a fairly minimal core. Additional features are usually added by using another module alongside `tape`.
+`t6` maintains a fairly minimal core. Additional features are usually added by using another module alongside `t6`.
 
 ## pretty reporters
 
@@ -123,7 +127,7 @@ of the modules of your choice!
 
 ## uncaught exceptions
 
-By default, uncaught exceptions in your tests will not be intercepted, and will cause `tape` to crash. If you find this behavior undesirable, use [`tape-catch`](https://github.com/michaelrhodes/tape-catch) to report any exceptions as TAP errors.
+By default, uncaught exceptions in your tests will not be intercepted, and will cause `t6` to crash. If you find this behavior undesirable, use [`tape-catch`](https://github.com/michaelrhodes/tape-catch) to report any exceptions as TAP errors.
 
 ## other
 
@@ -136,11 +140,11 @@ By default, uncaught exceptions in your tests will not be intercepted, and will 
 
 # methods
 
-The assertion methods in `tape` are heavily influenced or copied from the methods
+The assertion methods in `t6` are heavily influenced or copied from the methods
 in [node-tap](https://github.com/isaacs/node-tap).
 
 ```js
-var test = require('tape')
+import test from "@aredridel/t6";
 ```
 
 ## test([name], [opts], cb)
@@ -164,12 +168,12 @@ Generate a new test that will be skipped over.
 
 ## test.onFinish(fn)
 
-The onFinish hook will get invoked when ALL `tape` tests have finished
-right before `tape` is about to print the test summary.
+The onFinish hook will get invoked when ALL `t6` tests have finished
+right before `t6` is about to print the test summary.
 
 ## test.onFailure(fn)
 
-The onFailure hook will get invoked whenever any `tape` tests has failed.
+The onFailure hook will get invoked whenever any `t6` tests has failed.
 
 ## t.plan(n)
 
@@ -297,7 +301,7 @@ the first tick.
 ## test.only([name], [opts], cb)
 
 Like `test([name], [opts], cb)` except if you use `.only` this is the only test case
-that will run for the entire process, all other test cases using `tape` will
+that will run for the entire process, all other test cases using `t6` will
 be ignored.
 
 ## var stream = test.createStream(opts)
@@ -312,8 +316,8 @@ output, but you can get an object stream instead by setting `opts.objectMode` to
 You can create your own custom test reporter using this `createStream()` api:
 
 ``` js
-var test = require('tape');
-var path = require('path');
+import test fronm "@aredridel/t6";
+import path from "path";
 
 test.createStream().pipe(process.stdout);
 
@@ -354,8 +358,8 @@ ok 4 (unnamed assert)
 Here's how you can render an object stream instead of TAP:
 
 ``` js
-var test = require('tape');
-var path = require('path');
+import test from "@aredridel/t6";
+import path from "path";
 
 test.createStream({ objectMode: true }).on('data', function (row) {
     console.log(JSON.stringify(row))
@@ -387,7 +391,7 @@ $ node object.js test/x.js test/y.js
 With [npm](https://npmjs.org) do:
 
 ```sh
-npm install tape --save-dev
+npm install @aredridel/t6 --save-dev
 ```
 
 # license
