@@ -7,7 +7,7 @@ import { getDiag, stripFullStack } from './common.js';
 tape.test('not equal failure', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
-    var parser = tapParser();
+    var parser = new tapParser();
     assert.plan(3);
 
     stream.pipe(parser);
@@ -53,7 +53,8 @@ tape.test('not equal failure', function (assert) {
                 operator: 'notEqual',
                 expected: 2,
                 actual: 2
-            }
+            },
+            fullname: ''
         });
     });
 

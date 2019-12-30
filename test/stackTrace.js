@@ -9,7 +9,7 @@ tape.test('preserves stack trace with newlines', function (tt) {
 
     var test = createHarness();
     var stream = test.createStream();
-    var parser = stream.pipe(tapParser());
+    var parser = stream.pipe(new tapParser());
     var stackTrace = 'foo\n  bar';
 
     parser.once('assert', function (data) {
@@ -21,7 +21,8 @@ tape.test('preserves stack trace with newlines', function (tt) {
             diag: {
                 stack: stackTrace,
                 operator: 'error'
-            }
+            },
+            fullname: ''
         });
     });
 
@@ -101,7 +102,7 @@ tape.test('preserves stack trace for failed assertions', function (tt) {
 
     var test = createHarness();
     var stream = test.createStream();
-    var parser = stream.pipe(tapParser());
+    var parser = stream.pipe(new tapParser());
 
     var stack = '';
     parser.once('assert', function (data) {
@@ -120,7 +121,8 @@ tape.test('preserves stack trace for failed assertions', function (tt) {
                 operator: 'equal',
                 expected: false,
                 actual: true
-            }
+            },
+            fullname: ''
         });
     });
 
@@ -166,7 +168,7 @@ tape.test('preserves stack trace for failed assertions where actual===falsy', fu
 
     var test = createHarness();
     var stream = test.createStream();
-    var parser = stream.pipe(tapParser());
+    var parser = stream.pipe(new tapParser());
 
     var stack = '';
     parser.once('assert', function (data) {
@@ -185,7 +187,8 @@ tape.test('preserves stack trace for failed assertions where actual===falsy', fu
                 operator: 'equal',
                 expected: true,
                 actual: false
-            }
+            },
+            fullname: ''
         });
     });
 

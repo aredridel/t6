@@ -7,7 +7,7 @@ import { getDiag, stripFullStack } from './common.js';
 tape.test('deep equal failure', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
-    var parser = tapParser();
+    var parser = new tapParser();
     assert.plan(3);
 
     stream.pipe(parser);
@@ -55,7 +55,8 @@ tape.test('deep equal failure', function (assert) {
                 operator: 'equal',
                 expected: '{ b: 2 }',
                 actual: '{ a: 1 }'
-            }
+            },
+            fullname: ''
         });
     });
 
@@ -68,7 +69,7 @@ tape.test('deep equal failure', function (assert) {
 tape.test('deep equal failure, depth 6, with option', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
-    var parser = tapParser();
+    var parser = new tapParser();
     assert.plan(3);
 
     stream.pipe(parser);
@@ -116,7 +117,8 @@ tape.test('deep equal failure, depth 6, with option', function (assert) {
                 operator: 'equal',
                 expected: '{ a: { a1: { a2: { a3: { a4: { a5: 2 } } } } } }',
                 actual: '{ a: { a1: { a2: { a3: { a4: { a5: 1 } } } } } }'
-            }
+            },
+            fullname: ''
         });
     });
 
@@ -129,7 +131,7 @@ tape.test('deep equal failure, depth 6, with option', function (assert) {
 tape.test('deep equal failure, depth 6, without option', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
-    var parser = tapParser();
+    var parser = new tapParser();
     assert.plan(3);
 
     stream.pipe(parser);
@@ -177,7 +179,8 @@ tape.test('deep equal failure, depth 6, without option', function (assert) {
                 operator: 'equal',
                 expected: '{ a: { a1: { a2: { a3: { a4: [Object] } } } } }',
                 actual: '{ a: { a1: { a2: { a3: { a4: [Object] } } } } }'
-            }
+            },
+            fullname: ''
         });
     });
 

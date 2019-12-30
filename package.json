@@ -38,7 +38,7 @@
     "falafel": "^2.1.0",
     "js-yaml": "^3.13.1",
     "multi-tap": "^1.0.1",
-    "tap-parser": "^3.0.5",
+    "tap-parser": "^10.0.1",
     "tap-spec": "^5.0.0",
     "tape": "^4.12.1"
   },
