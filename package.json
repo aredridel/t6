@@ -1,6 +1,6 @@
 {
   "name": "@aredridel/t6",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "tap-producing ESM test harness for node and browsers",
   "main": "index.js",
   "type": "module",
