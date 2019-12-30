@@ -24,7 +24,7 @@ tap.test('requiring a single module', function (t) {
         ].join('\n') + '\n\n');
     };
 
-    var ps = tape('-r ./require/a require/test-a.js');
+    var ps = t6('-r ./require/a require/test-a.js');
     ps.stdout.pipe(concat(tc));
     ps.on('exit', function (code) {
         t.equal(code, 0);
@@ -56,15 +56,15 @@ tap.test('requiring multiple modules', function (t) {
         ].join('\n') + '\n\n');
     };
 
-    var ps = tape('-r ./require/a -r ./require/b require/test-a.js require/test-b.js');
+    var ps = t6('-r ./require/a -r ./require/b require/test-a.js require/test-b.js');
     ps.stdout.pipe(concat(tc));
     ps.on('exit', function (code) {
         t.equal(code, 0);
     });
 });
 
-function tape(args) {
-    const bin = path.resolve(url.fileURLToPath(import.meta.url), '../../bin/tape');
+function t6(args) {
+    const bin = path.resolve(url.fileURLToPath(import.meta.url), '../../bin/t6');
     const dir = path.resolve(url.fileURLToPath(import.meta.url), '../');
 
     return spawn('node', [bin].concat(args.split(' ')), { cwd: dir });
