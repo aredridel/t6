@@ -13,10 +13,10 @@ tap.test('array test', function (tt) {
         tt.same(stripFullStack(rows.toString('utf8')), [
             'TAP version 13',
             '# array',
-            'ok 1 should be equivalent',
-            'ok 2 should be equivalent',
-            'ok 3 should be equivalent',
-            'ok 4 should be equivalent',
+            'ok 1 good',
+            'ok 2 good',
+            'ok 3 good',
+            'ok 4 too many',
             'not ok 5 plan != count',
             '  ---',
             '    operator: fail',
@@ -26,13 +26,10 @@ tap.test('array test', function (tt) {
             '    stack: |-',
             '      Error: plan != count',
             '          [... stack stripped ...]',
-            '          at $TEST/too_many.js:$LINE:$COL',
-            '          at eval (eval at <anonymous> ($TEST/too_many.js:$LINE:$COL))',
-            '          at eval (eval at <anonymous> ($TEST/too_many.js:$LINE:$COL))',
             '          at Test.<anonymous> ($TEST/too_many.js:$LINE:$COL)',
             '          [... stack stripped ...]',
             '  ...',
-            'ok 6 should be equivalent',
+            'ok 6 good',
             '',
             '1..6',
             '# tests 6',
@@ -46,33 +43,12 @@ tap.test('array test', function (tt) {
     test('array', function (t) {
         t.plan(3);
 
-        var src = '(' + function () {
-            var xs = [ 1, 2, [ 3, 4 ] ];
-            var ys = [ 5, 6 ];
-            g([ xs, ys ]);
-        } + ')()';
+        t.pass('good');
+        t.pass('good');
+        t.pass('good');
+        t.pass('too many');
 
-        var output = falafel(src, function (node) {
-            if (node.type === 'ArrayExpression') {
-                node.update('fn(' + node.source() + ')');
-            }
-        });
-
-        var arrays = [
-            [ 3, 4 ],
-            [ 1, 2, [ 3, 4 ] ],
-            [ 5, 6 ],
-            [ [ 1, 2, [ 3, 4 ] ], [ 5, 6 ] ],
-        ];
-
-        Function(['fn','g'], output)(
-            function (xs) {
-                t.same(arrays.shift(), xs);
-                return xs;
-            },
-            function (xs) {
-                t.same(xs, [ [ 1, 2, [ 3, 4 ] ], [ 5, 6 ] ]);
-            }
-        );
+        t.plan(1);
+        t.pass('good');
     });
 });
