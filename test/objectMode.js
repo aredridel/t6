@@ -1,6 +1,5 @@
 import tape from 'tape';
 import { createStream, default as t6 } from '../index.js';
-import forEach from 'for-each';
 import through from 'through';
 
 tape.test('object results', function (assert) {
@@ -22,7 +21,7 @@ tape.test('object results', function (assert) {
 
         assert.equal(objects.length, 13);
 
-        forEach(objects, function (obj) {
+        objects.forEach(function (obj) {
             if (obj.type === 'assert') {
                 asserts++;
             } else if (obj.type === 'test') {
