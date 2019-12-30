@@ -45,7 +45,7 @@ tape.test('missing argument', function (assert) {
     });
 });
 
-// Exploratory test, can we call t.comment() passing nothing?
+// Exploratory test, can we call t.comment() passing null?
 tape.test('null argument', function (assert) {
     assert.plan(1);
     var test = createHarness();

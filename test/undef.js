@@ -4,7 +4,7 @@ import { createHarness } from "../index.js";
 
 import { stripFullStack } from "./common.js";
 
-tape.test('array test', function (tt) {
+tape.test('comparison of undefined in expectation', function (tt) {
     tt.plan(1);
 
     var test = createHarness();

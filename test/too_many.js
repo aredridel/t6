@@ -4,7 +4,7 @@ import concat from 'concat-stream';
 
 import { stripFullStack } from './common.js';
 
-tape.test('array test', function (tt) {
+tape.test('plan overflow', function (tt) {
     tt.plan(1);
 
     var test = createHarness({ exit: false });
