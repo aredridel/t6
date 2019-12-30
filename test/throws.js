@@ -2,7 +2,6 @@ import { createHarness } from '../index.js';
 import tape from 'tape';
 import concat from 'concat-stream';
 import inspect from 'object-inspect';
-import assign from 'object.assign';
 
 import { stripFullStack } from './common.js';
 
@@ -227,7 +226,7 @@ tape.test('failures', function (tt) {
             function () {
                 var otherErr = new TypeError('Not found');
                 // Copy all enumerable properties from `err` to `otherErr`.
-                assign(otherErr, err);
+                Object.assign(otherErr, err);
                 throw otherErr;
             },
             // The error's `message` and `name` properties will also be checked when using
