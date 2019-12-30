@@ -1,7 +1,7 @@
 import defined from 'defined';
 import createDefaultStream from './lib/default_stream.js';
 import Test from './lib/test.js';
-import createResult from './lib/results.js';
+import Result from './lib/results.js';
 import through from 'through';
 
 var canEmitExit = typeof process !== 'undefined' && process
@@ -111,7 +111,7 @@ var exitInterval;
 
 function createHarness(conf_) {
     if (!conf_) conf_ = {};
-    var results = createResult();
+    var results = new Result();
     if (conf_.autoclose !== false) {
         results.once('done', function () { results.close(); });
     }

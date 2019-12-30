@@ -171,9 +171,8 @@ tape.test('sync-error', function (t) {
             '',
             'Error: oopsie',
             '    at Test.myTest ($TEST/async-await/sync-error.js:$LINE:$COL)',
-            '    at Test.bound [as _cb] ($TAPE/lib/test.js:$LINE:$COL)',
+            '    at Test.<computed> [as _cb] ($TAPE/lib/test.js:$LINE:$COL)',
             '    at Test.run ($TAPE/lib/test.js:$LINE:$COL)',
-            '    at Test.bound [as run] ($TAPE/lib/test.js:$LINE:$COL)',
             ''
         ].join('\n'));
         t.end();
@@ -198,6 +197,8 @@ tape.test('async-error', function (t) {
             '    operator: fail',
             '    stack: |-',
             '      Error: Error: oopsie',
+            '          [... stack stripped ...]',
+            '          at $TAPE/lib/test.js:$LINE:$COL',
             '          [... stack stripped ...]',
             '  ...',
             '',
