@@ -32,3 +32,6 @@ max_line_length = off
 
 [.travis.yml]
 indent_size = 1
+
+[package.json]
+indent_size = 2
