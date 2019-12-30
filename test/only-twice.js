@@ -1,7 +1,7 @@
 import { createHarness } from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 
-tap.test('only twice error', function (assert) {
+tape.test('only twice error', function (assert) {
     var test = createHarness({ exit: false });
 
     test.only("first only", function (t) {

@@ -1,11 +1,11 @@
-import tap from 'tap';
+import tape from 'tape';
 import path from 'path';
 import { spawn } from 'child_process';
 import concat from 'concat-stream';
 import url from "url";
 const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
 
-tap.test('default messages', function (t) {
+tape.test('default messages', function (t) {
     t.plan(1);
 
     var ps = spawn(process.execPath, [path.join(__dirname, 'messages', 'defaults.js')]);

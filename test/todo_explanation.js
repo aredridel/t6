@@ -1,10 +1,10 @@
-import tap from 'tap';
+import tape from 'tape';
 import { createHarness } from '../index.js';
 import concat from 'concat-stream';
 
 import { stripFullStack } from "./common.js";
 
-tap.test('tape todo test', { todo: process.versions.node.match(/0\.8\.\d+/) ? 'Fails on node 0.8': false }, function (assert) {
+tape.test('tape todo test', { todo: process.versions.node.match(/0\.8\.\d+/) ? 'Fails on node 0.8': false }, function (assert) {
     var test = createHarness({ exit: false });
     assert.plan(1);
 

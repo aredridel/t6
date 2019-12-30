@@ -1,8 +1,8 @@
-import tap from 'tap';
+import tape from 'tape';
 import { createHarness } from "../index.js";
 import concat from 'concat-stream';
 
-tap.test('tape only test', function (tt) {
+tape.test('tape only test', function (tt) {
     var test = createHarness({ exit: false });
     var ran = [];
 

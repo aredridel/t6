@@ -1,5 +1,5 @@
 import { createHarness } from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 import inspect from 'object-inspect';
 import assign from 'object.assign';
@@ -26,7 +26,7 @@ var messageGetterError = Object.defineProperty(
 );
 var thrower = function () { throw messageGetterError; };
 
-tap.test('failures', function (tt) {
+tape.test('failures', function (tt) {
     tt.plan(1);
 
     var test = createHarness();

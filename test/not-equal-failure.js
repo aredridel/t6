@@ -1,10 +1,10 @@
 import { createHarness } from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 import tapParser from 'tap-parser';
 import { getDiag, stripFullStack } from './common.js';
 
-tap.test('not equal failure', function (assert) {
+tape.test('not equal failure', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
     var parser = tapParser();
@@ -37,8 +37,8 @@ tap.test('not equal failure', function (assert) {
 
         assert.deepEqual(getDiag(body), {
             operator: 'notEqual',
-            expected: '2',
-            actual: '2'
+            expected: 2,
+            actual: 2
         });
     }));
 
@@ -51,8 +51,8 @@ tap.test('not equal failure', function (assert) {
             name: 'should not be equal',
             diag: {
                 operator: 'notEqual',
-                expected: '2',
-                actual: '2'
+                expected: 2,
+                actual: 2
             }
         });
     });

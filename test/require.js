@@ -1,10 +1,10 @@
-import tap from 'tap';
+import tape from 'tape';
 import { spawn } from 'child_process';
 import concat from 'concat-stream';
 import url from "url";
 import path from "path";
 
-tap.test('requiring a single module', function (t) {
+tape.test('requiring a single module', function (t) {
     t.plan(2);
 
     var tc = function (rows) {
@@ -31,7 +31,7 @@ tap.test('requiring a single module', function (t) {
     });
 });
 
-tap.test('requiring multiple modules', function (t) {
+tape.test('requiring multiple modules', function (t) {
     t.plan(2);
 
     var tc = function (rows) {

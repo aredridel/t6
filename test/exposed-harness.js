@@ -1,7 +1,7 @@
 import { getHarness } from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 
-tap.test('main harness object is exposed', function (assert) {
+tape.test('main harness object is exposed', function (assert) {
 
     assert.equal(typeof getHarness, 'function', 'tape.getHarness is a function');
 

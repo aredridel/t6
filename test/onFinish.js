@@ -1,9 +1,9 @@
-import tap from 'tap';
-import tape from "../index.js";
+import tape from 'tape';
+import t6 from "../index.js";
 
-tap.test("on finish", {timeout: 1000}, function (tt) {
+tape.test("on finish", {timeout: 1000}, function (tt) {
     tt.plan(1);
-    tape.onFinish(function () {
+    t6.onFinish(function () {
         tt.pass('tape ended');
     });
     tape('dummy test', function (t) {

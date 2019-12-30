@@ -1,10 +1,10 @@
-import tap from 'tap';
+import tape from 'tape';
 import { createHarness } from '../index.js';
 import concat from 'concat-stream';
 
 import { stripFullStack } from './common.js';
 
-tap.test('tape todo test', function (assert) {
+tape.test('tape todo test', function (assert) {
     var test = createHarness({ exit: false });
     assert.plan(1);
 

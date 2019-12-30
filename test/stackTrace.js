@@ -1,10 +1,10 @@
 import { createHarness } from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 import tapParser from 'tap-parser';
 import yaml from 'js-yaml';
 
-tap.test('preserves stack trace with newlines', function (tt) {
+tape.test('preserves stack trace with newlines', function (tt) {
     tt.plan(3);
 
     var test = createHarness();
@@ -60,7 +60,7 @@ tap.test('preserves stack trace with newlines', function (tt) {
     });
 });
 
-tap.test('parses function name from original stack', function (tt) {
+tape.test('parses function name from original stack', function (tt) {
     tt.plan(1);
 
     var test = createHarness();
@@ -78,7 +78,7 @@ tap.test('parses function name from original stack', function (tt) {
     });
 });
 
-tap.test('parses function name from original stack for anonymous function', function (tt) {
+tape.test('parses function name from original stack for anonymous function', function (tt) {
     tt.plan(1);
 
     var test = createHarness();
@@ -96,7 +96,7 @@ tap.test('parses function name from original stack for anonymous function', func
     });
 });
 
-tap.test('preserves stack trace for failed assertions', function (tt) {
+tape.test('preserves stack trace for failed assertions', function (tt) {
     tt.plan(6);
 
     var test = createHarness();
@@ -161,7 +161,7 @@ tap.test('preserves stack trace for failed assertions', function (tt) {
     });
 });
 
-tap.test('preserves stack trace for failed assertions where actual===falsy', function (tt) {
+tape.test('preserves stack trace for failed assertions where actual===falsy', function (tt) {
     tt.plan(6);
 
     var test = createHarness();

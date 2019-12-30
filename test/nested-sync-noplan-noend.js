@@ -1,8 +1,8 @@
 import { createHarness } from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 
-tap.test('nested sync test without plan or end', function (tt) {
+tape.test('nested sync test without plan or end', function (tt) {
     tt.plan(1);
 
     var test = createHarness();

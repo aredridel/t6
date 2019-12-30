@@ -1,4 +1,4 @@
-import tap from 'tap';
+import tape from 'tape';
 import path from 'path';
 import { spawn } from 'child_process';
 import concat from 'concat-stream';
@@ -7,7 +7,7 @@ const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
 
 import { stripFullStack } from './common.js';
 
-tap.test('callback returning rejected promise should cause that test (and only that test) to fail', function (tt) {
+tape.test('callback returning rejected promise should cause that test (and only that test) to fail', function (tt) {
     tt.plan(1);
 
     var ps = spawn(process.execPath, [path.join(__dirname, 'promises', 'fail.js')]);
@@ -50,7 +50,7 @@ tap.test('callback returning rejected promise should cause that test (and only t
     }));
 });
 
-tap.test('subtest callback returning rejected promise should cause that subtest (and only that subtest) to fail', function (tt) {
+tape.test('subtest callback returning rejected promise should cause that subtest (and only that subtest) to fail', function (tt) {
     tt.plan(1);
 
     var ps = spawn(process.execPath, [path.join(__dirname, 'promises', 'subTests.js')]);

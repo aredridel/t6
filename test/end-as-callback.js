@@ -1,9 +1,9 @@
-import tap from "tap";
+import tape from "tape";
 import forEach from "for-each";
 import {createHarness} from "../index.js";
 import concat from 'concat-stream';
 
-tap.test("tape assert.end as callback", function (tt) {
+tape.test("tape assert.end as callback", function (tt) {
     var test = createHarness({ exit: false });
 
     test.createStream().pipe(concat(function (rows) {

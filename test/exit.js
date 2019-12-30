@@ -1,4 +1,4 @@
-import tap from 'tap';
+import tape from 'tape';
 import path from 'path';
 import { spawn } from 'child_process';
 import concat from 'concat-stream';
@@ -6,7 +6,7 @@ import { stripFullStack } from "./common.js";
 import url from "url";
 const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
 
-tap.test('exit ok', function (t) {
+tape.test('exit ok', function (t) {
     t.plan(2);
 
     var tc = function (rows) {
@@ -37,7 +37,7 @@ tap.test('exit ok', function (t) {
     });
 });
 
-tap.test('exit fail', function (t) {
+tape.test('exit fail', function (t) {
     t.plan(2);
 
     var tc = function (rows) {
@@ -78,7 +78,7 @@ tap.test('exit fail', function (t) {
     });
 });
 
-tap.test('too few exit', function (t) {
+tape.test('too few exit', function (t) {
     t.plan(2);
 
     var tc = function (rows) {
@@ -115,7 +115,7 @@ tap.test('too few exit', function (t) {
     });
 });
 
-tap.test('more planned in a second test', function (t) {
+tape.test('more planned in a second test', function (t) {
     t.plan(2);
 
     var tc = function (rows) {
@@ -150,7 +150,7 @@ tap.test('more planned in a second test', function (t) {
     });
 });
 
-tap.test('todo passing', function (t) {
+tape.test('todo passing', function (t) {
     t.plan(2);
 
     var tc = function (rows) {
@@ -174,7 +174,7 @@ tap.test('todo passing', function (t) {
     });
 });
 
-tap.test('todo failing', function (t) {
+tape.test('todo failing', function (t) {
     t.plan(2);
 
     var tc = function (rows) {

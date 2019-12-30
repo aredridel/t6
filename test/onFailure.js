@@ -1,7 +1,7 @@
-import tap from "tap";
+import tape from "tape";
 import { createHarness, createStream } from "../index.js";
 
-tap.test("on failure", { timeout: 1000 }, function (tt) {
+tape.test("on failure", { timeout: 1000 }, function (tt) {
     tt.plan(1);
 
     //Because this test passing depends on a failure,

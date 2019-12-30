@@ -1,4 +1,4 @@
-import tap from 'tap';
+import tape from 'tape';
 import { stripFullStack, runProgram } from './common.js';
 
 var nodeVersion = process.versions.node;
@@ -8,7 +8,7 @@ if (Number(majorVersion) < 8) {
     process.exit(0);
 }
 
-tap.test('async1', function (t) {
+tape.test('async1', function (t) {
     runProgram('async-await', 'async1.js', function (r) {
         t.same(r.stdout.toString('utf8'), [
             'TAP version 13',
@@ -28,7 +28,7 @@ tap.test('async1', function (t) {
     });
 });
 
-tap.test('async2', function (t) {
+tape.test('async2', function (t) {
     runProgram('async-await', 'async2.js', function (r) {
         var stdout = r.stdout.toString('utf8');
         var lines = stdout.split('\n');
@@ -64,7 +64,7 @@ tap.test('async2', function (t) {
     });
 });
 
-tap.test('async3', function (t) {
+tape.test('async3', function (t) {
     runProgram('async-await', 'async3.js', function (r) {
         t.same(r.stdout.toString('utf8'), [
             'TAP version 13',
@@ -84,7 +84,7 @@ tap.test('async3', function (t) {
     });
 });
 
-tap.test('async4', function (t) {
+tape.test('async4', function (t) {
     runProgram('async-await', 'async4.js', function (r) {
         t.same(stripFullStack(r.stdout.toString('utf8')), [
             'TAP version 13',
@@ -111,7 +111,7 @@ tap.test('async4', function (t) {
     });
 });
 
-tap.test('async5', function (t) {
+tape.test('async5', function (t) {
     runProgram('async-await', 'async5.js', function (r) {
         t.same(stripFullStack(r.stdout.toString('utf8')), [
             'TAP version 13',
@@ -145,7 +145,7 @@ tap.test('async5', function (t) {
     });
 });
 
-tap.test('sync-error', function (t) {
+tape.test('sync-error', function (t) {
     runProgram('async-await', 'sync-error.js', function (r) {
         t.same(stripFullStack(r.stdout.toString('utf8')), [
             'TAP version 13',
@@ -180,7 +180,7 @@ tap.test('sync-error', function (t) {
     });
 });
 
-tap.test('async-error', function (t) {
+tape.test('async-error', function (t) {
     runProgram('async-await', 'async-error.js', function (r) {
         var stdout = r.stdout.toString('utf8');
         var lines = stdout.split('\n');

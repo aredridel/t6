@@ -1,4 +1,4 @@
-import tap from "tap";
+import tape from "tape";
 import path from "path";
 import concat from "concat-stream";
 import { spawn } from 'child_process';
@@ -6,7 +6,7 @@ import { stripFullStack } from "./common.js";
 import url from "url";
 const __dirname = url.fileURLToPath(url.resolve(import.meta.url, '.'));
 
-tap.test(function (t) {
+tape.test(function (t) {
     t.plan(2);
     var ps = spawn(process.execPath, [path.join(__dirname, 'double_end', 'double.js')]);
     ps.on('exit', function (code) {

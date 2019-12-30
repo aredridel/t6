@@ -1,10 +1,10 @@
 import concat from 'concat-stream';
-import tap from 'tap';
+import tape from 'tape';
 import { createHarness } from "../index.js";
 
 // Exploratory test to ascertain proper output when no t.comment() call
 // is made.
-tap.test('no comment', function (assert) {
+tape.test('no comment', function (assert) {
     assert.plan(1);
 
     var verify = function (output) {
@@ -29,7 +29,7 @@ tap.test('no comment', function (assert) {
 });
 
 // Exploratory test, can we call t.comment() passing nothing?
-tap.test('missing argument', function (assert) {
+tape.test('missing argument', function (assert) {
     assert.plan(1);
     var test = createHarness();
     test.createStream();
@@ -46,7 +46,7 @@ tap.test('missing argument', function (assert) {
 });
 
 // Exploratory test, can we call t.comment() passing nothing?
-tap.test('null argument', function (assert) {
+tape.test('null argument', function (assert) {
     assert.plan(1);
     var test = createHarness();
     test.createStream();
@@ -64,7 +64,7 @@ tap.test('null argument', function (assert) {
 
 
 // Exploratory test, how is whitespace treated?
-tap.test('whitespace', function (assert) {
+tape.test('whitespace', function (assert) {
     assert.plan(1);
 
     var verify = function (output) {
@@ -97,7 +97,7 @@ tap.test('whitespace', function (assert) {
 });
 
 // Exploratory test, how about passing types other than strings?
-tap.test('non-string types', function (assert) {
+tape.test('non-string types', function (assert) {
     assert.plan(1);
 
     var verify = function (output) {
@@ -138,7 +138,7 @@ tap.test('non-string types', function (assert) {
     });
 });
 
-tap.test('multiline string', function (assert) {
+tape.test('multiline string', function (assert) {
     assert.plan(1);
 
     var verify = function (output) {

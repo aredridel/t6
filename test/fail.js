@@ -1,11 +1,11 @@
 import falafel from 'falafel';
 import {createHarness} from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 
 import { stripFullStack } from "./common.js";
 
-tap.test('array test', function (tt) {
+tape.test('array test', function (tt) {
     tt.plan(1);
 
     var test = createHarness({ exit: false });

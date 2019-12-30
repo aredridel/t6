@@ -1,9 +1,9 @@
-import tap from 'tap';
-import { createStream, default as tape } from '../index.js';
+import tape from 'tape';
+import { createStream, default as t6 } from '../index.js';
 import forEach from 'for-each';
 import through from 'through';
 
-tap.test('object results', function (assert) {
+tape.test('object results', function (assert) {
     var printer = through({ objectMode: true });
     var objects = [];
 
@@ -50,7 +50,7 @@ tap.test('object results', function (assert) {
     createStream({ objectMode: true })
         .pipe(printer);
 
-    tape('parent', function (t1) {
+    t6('parent', function (t1) {
         t1.equal(true, true);
         t1.test('child1', {skip: true}, function (t2) {
             t2.equal(true, true);

@@ -1,9 +1,9 @@
-import tap from 'tap';
+import tape from 'tape';
 import { createHarness } from "../index.js";
 import concat from 'concat-stream';
 import { stripFullStack } from './common.js';
 
-tap.test('test skip explanations', function (assert) {
+tape.test('test skip explanations', function (assert) {
     assert.plan(1);
 
     var verify = function (output) {

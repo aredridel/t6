@@ -1,10 +1,10 @@
 import { createHarness } from '../index.js';
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 
 import { stripFullStack } from './common.js';
 
-tap.test('no callback', function (tt) {
+tape.test('no callback', function (tt) {
     tt.plan(1);
 
     var test = createHarness();

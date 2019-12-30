@@ -1,10 +1,10 @@
 import { createHarness } from "../index.js";
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 import tapParser from 'tap-parser';
 import { getDiag, stripFullStack } from './common.js';
 
-tap.test('deep equal failure', function (assert) {
+tape.test('deep equal failure', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
     var parser = tapParser();
@@ -65,7 +65,7 @@ tap.test('deep equal failure', function (assert) {
     });
 });
 
-tap.test('deep equal failure, depth 6, with option', function (assert) {
+tape.test('deep equal failure, depth 6, with option', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
     var parser = tapParser();
@@ -126,7 +126,7 @@ tap.test('deep equal failure, depth 6, with option', function (assert) {
     });
 });
 
-tap.test('deep equal failure, depth 6, without option', function (assert) {
+tape.test('deep equal failure, depth 6, without option', function (assert) {
     var test = createHarness({ exit: false });
     var stream = test.createStream();
     var parser = tapParser();

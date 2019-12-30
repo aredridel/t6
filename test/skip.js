@@ -1,10 +1,10 @@
 import { createHarness, default as test } from '../index.js';
 import concat from 'concat-stream';
-import tap from 'tap';
+import tape from 'tape';
 
 var ran = 0;
 
-tap.test('test SKIP comment', function (assert) {
+tape.test('test SKIP comment', function (assert) {
     assert.plan(1);
 
     var verify = function (output) {

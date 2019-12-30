@@ -1,11 +1,11 @@
 import { createHarness } from "../index.js";
-import tap from 'tap';
+import tape from 'tape';
 import concat from 'concat-stream';
 
 import {stripFullStack } from './common.js';
 import testWrapper from './anonymous-fn/test-wrapper.js';
 
-tap.test('inside anonymous functions', function (tt) {
+tape.test('inside anonymous functions', function (tt) {
     tt.plan(1);
 
     var test = createHarness();
