@@ -1,4 +1,3 @@
-import falafel from 'falafel';
 import { createHarness } from '../index.js';
 import tape from 'tape';
 import concat from 'concat-stream';

@@ -1,4 +1,3 @@
-import falafel from 'falafel';
 import { createHarness } from '../index.js';
 import tape from "tape";
 import concat from 'concat-stream';
@@ -29,17 +28,11 @@ tape.test('array test', function (tt) {
     test('array', function (t) {
         t.plan(5);
 
-        var src = '(' + function () {
-            var xs = [ 1, 2, [ 3, 4 ] ];
-            var ys = [ 5, 6 ];
-            g([ xs, ys ]);
+        function thinger(fn, g) {
+            var xs = fn([ 1, 2, fn([ 3, 4 ]) ]);
+            var ys = fn([ 5, 6 ]);
+            g(fn([ xs, ys ]));
         } + ')()';
-
-        var output = falafel(src, function (node) {
-            if (node.type === 'ArrayExpression') {
-                node.update('fn(' + node.source() + ')');
-            }
-        });
 
         var arrays = [
             [ 3, 4 ],
@@ -48,7 +41,7 @@ tape.test('array test', function (tt) {
             [ [ 1, 2, [ 3, 4 ] ], [ 5, 6 ] ],
         ];
 
-        Function(['fn','g'], output)(
+        thinger(
             function (xs) {
                 t.same(arrays.shift(), xs);
                 return xs;

@@ -1,4 +1,3 @@
-import falafel from 'falafel';
 import {createHarness} from '../index.js';
 import tape from 'tape';
 import concat from 'concat-stream';
@@ -22,13 +21,12 @@ tape.test('array test', function (tt) {
             '    operator: deepEqual',
             '    expected: [ [ 1, 2, [ 3, 4444 ] ], [ 5, 6 ] ]',
             '    actual:   [ [ 1, 2, [ 3, 4 ] ], [ 5, 6 ] ]',
-            '    at: Test.<anonymous> ($TEST/fail.js:$LINE:$COL)',
+            '    at: thinger ($TEST/fail.js:$LINE:$COL)',
             '    stack: |-',
             '      Error: should be equivalent',
             '          [... stack stripped ...]',
             '          at $TEST/fail.js:$LINE:$COL',
-            '          at eval (eval at <anonymous> ($TEST/fail.js:$LINE:$COL))',
-            '          at eval (eval at <anonymous> ($TEST/fail.js:$LINE:$COL))',
+            '          at thinger ($TEST/fail.js:$LINE:$COL)',
             '          at Test.<anonymous> ($TEST/fail.js:$LINE:$COL)',
             '          [... stack stripped ...]',
             '  ...',
@@ -46,17 +44,11 @@ tape.test('array test', function (tt) {
     test('array', function (t) {
         t.plan(5);
 
-        var src = '(' + function () {
-            var xs = [ 1, 2, [ 3, 4 ] ];
-            var ys = [ 5, 6 ];
-            g([ xs, ys ]);
-        } + ')()';
-
-        var output = falafel(src, function (node) {
-            if (node.type === 'ArrayExpression') {
-                node.update('fn(' + node.source() + ')');
-            }
-        });
+        function thinger(fn, g) {
+            var xs = fn([ 1, 2, fn([ 3, 4 ]) ]);
+            var ys = fn([ 5, 6 ]);
+            g(fn([ xs, ys ]));
+        }
 
         var arrays = [
             [ 3, 4 ],
@@ -65,7 +57,7 @@ tape.test('array test', function (tt) {
             [ [ 1, 2, [ 3, 4 ] ], [ 5, 6 ] ],
         ];
 
-        Function(['fn','g'], output)(
+        thinger(
             function (xs) {
                 t.same(arrays.shift(), xs);
                 return xs;

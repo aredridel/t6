@@ -33,7 +33,6 @@
     "concat-stream": "^2.0.0",
     "eclint": "^2.8.1",
     "eslint": "^6.8.0",
-    "falafel": "^2.1.0",
     "js-yaml": "^3.13.1",
     "multi-tap": "^1.0.1",
     "tap-parser": "^10.0.1",

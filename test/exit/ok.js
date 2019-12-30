@@ -1,21 +1,14 @@
 import test from "../../index.js";
-import falafel from 'falafel';
 
 test('array', function (t) {
     t.comment('hi');
     t.plan(5);
 
-    var src = '(' + function () {
-        var xs = [ 1, 2, [ 3, 4 ] ];
-        var ys = [ 5, 6 ];
-        g([ xs, ys ]);
-    } + ')()';
-
-    var output = falafel(src, function (node) {
-        if (node.type === 'ArrayExpression') {
-            node.update('fn(' + node.source() + ')');
-        }
-    });
+    function thinger(fn, g) {
+        var xs = fn([ 1, 2, fn([ 3, 4 ]) ]);
+        var ys = fn([ 5, 6 ]);
+        g(fn([ xs, ys ]));
+    }
 
     var arrays = [
         [ 3, 4 ],
@@ -24,7 +17,7 @@ test('array', function (t) {
         [ [ 1, 2, [ 3, 4 ] ], [ 5, 6 ] ],
     ];
 
-    Function(['fn','g'], output)(
+    thinger(
         function (xs) {
             t.same(arrays.shift(), xs);
             return xs;
