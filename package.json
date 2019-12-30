@@ -8,7 +8,6 @@
     "t6": "bin/t6"
   },
   "directories": {
-    "example": "example",
     "lib": "lib",
     "test": "test"
   },
