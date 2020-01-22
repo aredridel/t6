@@ -75,7 +75,7 @@ function createExitHarness(conf) {
     var stream = harness.createStream({ objectMode: conf.objectMode });
     var es = stream.pipe(conf.stream || createDefaultStream());
     if (canEmitExit) {
-        es.on('error', function (err) { harness._exitCode = 1; });
+        es.on('error', function () { harness._exitCode = 1; });
     }
 
     var ended = false;
@@ -106,8 +106,6 @@ function createExitHarness(conf) {
 }
 
 export { createHarness, Test, lazyLoad as test };
-
-var exitInterval;
 
 function createHarness(conf_) {
     if (!conf_) conf_ = {};
