@@ -1,8 +1,8 @@
 import defined from 'defined';
-import createDefaultStream from './lib/default_stream.js';
-import Test from './lib/test.js';
-import Result from './lib/results.js';
 import through from 'through';
+import createDefaultStream from './lib/default_stream.js';
+import Result from './lib/results.js';
+import Test from './lib/test.js';
 
 var canEmitExit = typeof process !== 'undefined' && process
     && typeof process.on === 'function' && process.browser !== true
@@ -105,7 +105,7 @@ function createExitHarness(conf) {
     return harness;
 }
 
-export { createHarness, Test, lazyLoad as test };
+export {createHarness, Test, lazyLoad as test};
 
 function createHarness(conf_) {
     if (!conf_) conf_ = {};
