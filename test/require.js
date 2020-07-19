@@ -5,7 +5,7 @@ import url from "url";
 import path from "path";
 
 tape.test('requiring a single module', function (t) {
-    t.plan(2);
+    t.plan(3);
 
     var tc = function (rows) {
         t.same(rows.toString('utf8'), [
@@ -24,7 +24,10 @@ tape.test('requiring a single module', function (t) {
         ].join('\n') + '\n\n');
     };
 
-    var ps = t6('-r ./require/a require/test-a.js');
+    var ps = t6('-r ./require/a.js require/test-a.js');
+    ps.stderr.pipe(concat(x => {
+        t.equal(x.toString('utf8'), '');
+    }));
     ps.stdout.pipe(concat(tc));
     ps.on('exit', function (code) {
         t.equal(code, 0);
@@ -32,7 +35,7 @@ tape.test('requiring a single module', function (t) {
 });
 
 tape.test('requiring multiple modules', function (t) {
-    t.plan(2);
+    t.plan(3);
 
     var tc = function (rows) {
         t.same(rows.toString('utf8'), [
@@ -56,7 +59,10 @@ tape.test('requiring multiple modules', function (t) {
         ].join('\n') + '\n\n');
     };
 
-    var ps = t6('-r ./require/a -r ./require/b require/test-a.js require/test-b.js');
+    var ps = t6('-r ./require/a.js -r ./require/b.js require/test-a.js require/test-b.js');
+    ps.stderr.pipe(concat(x => {
+        t.equal(x.toString('utf8'), '');
+    }));
     ps.stdout.pipe(concat(tc));
     ps.on('exit', function (code) {
         t.equal(code, 0);
@@ -64,7 +70,7 @@ tape.test('requiring multiple modules', function (t) {
 });
 
 function t6(args) {
-    const bin = path.resolve(url.fileURLToPath(import.meta.url), '../../bin/t6');
+    const bin = path.resolve(url.fileURLToPath(import.meta.url), '../../bin/t6.js');
     const dir = path.resolve(url.fileURLToPath(import.meta.url), '../');
 
     return spawn('node', [bin].concat(args.split(' ')), { cwd: dir });

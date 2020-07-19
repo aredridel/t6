@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "t6": "bin/t6"
+    "t6": "bin/t6.js"
   },
   "directories": {
     "lib": "lib",
