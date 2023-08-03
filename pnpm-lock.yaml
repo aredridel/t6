@@ -25,7 +25,7 @@ dependencies:
     version: 1.1.0
   minimist:
     specifier: ^1.2.5
-    version: 1.2.5
+    version: 1.2.6
   object-inspect:
     specifier: ^1.7.0
     version: 1.8.0
@@ -1918,8 +1918,8 @@ packages:
     dependencies:
       brace-expansion: 1.1.11
 
-  /minimist@1.2.5:
-    resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+  /minimist@1.2.6:
+    resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
 
   /minipass@3.1.1:
     resolution: {integrity: sha512-UFqVihv6PQgwj8/yTGvl9kPz7xIAY+R5z6XYjRInD3Gk3qx6QGSD6zEcpeG4Dy/lQnv1J6zv8ejV90hyYIKf3w==}
@@ -1932,7 +1932,7 @@ packages:
     resolution: {integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==}
     hasBin: true
     dependencies:
-      minimist: 1.2.5
+      minimist: 1.2.6
     dev: true
 
   /ms@0.7.1:
@@ -1960,7 +1960,7 @@ packages:
       glob: 7.1.6
       js-yaml: 3.6.1
       micromatch: 2.3.11
-      minimist: 1.2.5
+      minimist: 1.2.6
       multistream: 2.1.1
       pump: 1.0.3
       tap-parser: 3.0.5
@@ -2742,7 +2742,7 @@ packages:
       has: 1.0.3
       inherits: 2.0.4
       is-regex: 1.0.5
-      minimist: 1.2.5
+      minimist: 1.2.6
       object-inspect: 1.7.0
       resolve: 1.17.0
       resumer: 0.0.0
